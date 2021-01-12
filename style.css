@@ -1,0 +1,55 @@
+body{
+	background-color: black;
+}
+li{
+	/*text-align: center;*/
+}
+
+.jumbotron{
+	color: #bfbfbf;
+	background-color: black;
+}
+.col-sm-4{
+  	font-size: 16px;
+	border: solid darkgrey 1px;
+	color: white;
+	padding-bottom: 10px;
+}
+#copyright{
+	color: #bfbfbf;
+	position: absolute;
+   top: auto;
+  	font-size: 11px;
+}
+a{
+	color: #00ffff;
+}
+#nostyle{
+	color: #bfbfbf;	
+}
+p{
+	color: #bfbfbf;
+}
+#footer { 
+	margin-top: 2%;
+	padding-top: 2%;
+	
+	border-top: solid #bfbfbf; 2px;
+	border-radius: 0px;
+}
+#header{
+	border-bottom: solid #d9d9d9 2px;	
+	border-radius: 0px;	
+}
+li{
+	margin-left: 12%;
+}
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
