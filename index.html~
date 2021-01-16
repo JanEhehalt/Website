@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,17 +20,17 @@
     		<h3> About the Website </h3>
       	<br>
       	<p>
-			Welcome to my Website! Here you can find much information about the Projects I did or I am currently working on. 
-			It is split up in 'Hardware' and 'Software'. To the right you can find many links. Just look around!
+			Welcome to my Website! Here you can find much information about the Projects I did or I am currently working on. 99% of the projects are IT-related,
+			so if you're interested feel free to look around.
       	</p>
       	<h3> About Me </h3>
       	<br>
       	<p>
-			Hey! I'm Jan and I am working on much IT-related stuff. From coding stuff to building computers for friends and for myself. At the moment 
-			I am still in school and
+			Hey! I'm Jan and I am working on much IT-related stuff. From coding to building computers for others and for myself. At the moment 
+			I'm still going to school and
 			I will graduate from High School this year. Then I will do my bachelor of science at the <a href="https://www.provadis.de/" >Provadis</a>
 			with the help of <a href="https://www.telekom.de/start" >Telekom</a>.
-			At the moment there are several Projects I'm working on. You can find all of them on the right.
+			At the moment there are several Projects I'm working on. You can find all of them on this page.
       	</p>
     	</div>
     	<div class="col-sm-4" id="center">
@@ -40,18 +41,18 @@
     			<a href="software/rpg.html" > RPG </a>
     		</li>
     		<li>
-    			<a href="" id="nostyle"> Bwinf </a>
+    			<a href="software/bwinf.html"> Bwinf 39</a>
     		</li>
     		
     		<h4> Finished</h4>
     		<li>
-    			<a href="" id="nostyle"> The Restless Caverns </a>
+    			<a href="https://play.google.com/store/apps/details?id=com.throwgame.main"><i style='font-size:16px' class='fab'>&#xf3ab;</i>  Orbital Throw </a>
     		</li>
     		<li>
-    			<a href="" id="nostyle"> Orbital Throw </a>
+    			<a href="software/trc.html"> The Restless Caverns </a>
     		</li>
     		<li>
-    			<a href="" id="nostyle"> Starve the Monster </a>
+    			<a href="https://play.google.com/store/apps/details?id=com.trs.game" ><i style='font-size:16px' class='fab'>&#xf3ab;</i>  Starve the Monster </a>
     		</li>
     		
     		

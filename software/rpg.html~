@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 	<style type="text/css">
 		#copyright{
 			color: #bfbfbf;
@@ -65,8 +66,8 @@
 
 <div class="container">
 	<div class="jumbotron"  id="header">
-    		<a href="../index.html" id="nostyle"><h1><center>Jan Ehehalt</center></h1></a>
-    		<a href="https://hager-jonathan.de" id="nostyle"><h3><center>Jonathan Hager</center></h3></a>
+    		<h1><center>RPG</center></h1>
+    		<a href="https://jan-ehehalt.de" id="nostyle"><h3><center>Jan Ehehalt</center></h3></a> <a href="https://hager-jonathan.de" id="nostyle"><h3><center>Jonathan Hager</center></h3></a>
   	</div>
   	<div class="row" style="margin-left: 1%; margin-right: 1%;">
     	<div class="col-sm-4" id="left">
@@ -94,10 +95,13 @@
     	<div class="col-sm-4" id = "right">
     		<h3><center> Links </center></h3>
     		<li>
-    			<a href="software/rpg.html" > Gitlab </a>
+    			 <a href="https://gitlab.com/JonathanHager/rpg" ><i style='font-size:16px' class='fab'>&#xf296;</i> Gitlab </a>
     		</li>
     		<li>
-    			<a href="https://hager-jonathan.de" > Our own Git </a>
+    			<a href="https://hager-jonathan.de" ><i style='font-size:16px' class='fab'>&#xf1d3;</i>  Our own Git </a>
+    		</li>
+    		<li>
+    			<a href="" ><i style='font-size:16px' class='fab'>&#xf3ab;</i>  PlayStore [not available yet] </a>
     		</li>
     		
     	</div>
@@ -109,7 +113,6 @@
 </div>
 
 <p class="noselect" id="copyright"> ©Jan Ehehalt, 2021</p>
-<a href="../index.html" id="nostyle"><p style="position: absolute; top: 0; font-size: 62px; margin-left: 8%;"> &lt </p></a>
 
 
 </body>
