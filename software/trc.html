@@ -67,6 +67,7 @@
 	<center>
 		<canvas id="canvas1" width="192" height="192" style="border: solid gray 1px; margin-bottom: -50px;"> Hier wäre eine coole Animation, würdest du Javascript zulassen...</canvas>
 		<canvas id="canvas2" width="192" height="192" style="border: solid gray 1px; margin-bottom: -50px;"> Hier wäre eine coole Animation, würdest du Javascript zulassen...</canvas>
+		<canvas id="canvas3" width="192" height="192" style="border: solid gray 1px; margin-bottom: -50px;"> Hier wäre eine coole Animation, würdest du Javascript zulassen...</canvas>
 		
 	</center>
 	<center><button type="button" style="margin-top: 50px; background-color: black; color: gray;" onclick="button()">start / stop</button></center>
@@ -76,6 +77,9 @@
 
 	var c2 = document.getElementById("canvas2");
 	var ctx2 = c2.getContext("2d");
+
+	var c3 = document.getElementById("canvas3");
+	var ctx3 = c3.getContext("2d");
 	
 	let paused = false;
 	let currentImg = 0;
@@ -83,12 +87,14 @@
 	let player = new Image();
 	player.src = "./trc-animation/player.png";
 
-	let spell = new Image();
-	spell.src = "./trc-animation/firespell.png";
+	let archer = new Image();
+	archer.src = "./trc-animation/archer.png";
 	
+	let wizard = new Image();
+	wizard.src = "./trc-animation/wizard.png";
 
 	act();
-	setInterval(act, 120);
+	setInterval(act, 140);
 
 	function act(){
 		if(!paused){
@@ -101,10 +107,12 @@
 
 			ctx.clearRect(0,0,256,256);
 			ctx2.clearRect(0,0,256,256);
+			ctx3.clearRect(0,0,256,256);
 			
 		
-			ctx2.drawImage(spell,0-currentImg*192,0);
 			ctx.drawImage(player,0-currentImg*192,0);
+			ctx2.drawImage(archer,0-currentImg*192,0);
+			ctx3.drawImage(wizard,0-currentImg*192,0);
 		}
 	}
 
