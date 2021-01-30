@@ -64,6 +64,35 @@
 </head>
 <body>
 
+	<center><canvas id="canvas" width="192" height="192" style="border: solid gray 1px; margin-bottom: -50px;"> Hier wäre eine coole Animation, würdest du Javascript zulassen...</canvas></center>
+
+	<script>
+	var c = document.getElementById("canvas");
+	var ctx = c.getContext("2d");
+	
+	let currentImg = 0;
+
+	act();
+	setInterval(act, 150);
+
+	function act(){
+
+		if(currentImg === 9){
+			currentImg = 0;
+		}
+		else{
+			currentImg++;
+		}
+
+		ctx.clearRect(0,0,256,256);
+		let img = new Image();
+		img.src = "./trc-animation/"+currentImg+".png";
+	
+		ctx.drawImage(img,0,0,192,192);
+	}
+	</script>
+
+
 <div class="container">
 	<div class="jumbotron"  id="header">
     		<h1><center>The Restless Caverns</center></h1>
