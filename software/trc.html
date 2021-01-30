@@ -67,16 +67,17 @@
 	<center>
 		<canvas id="canvas1" width="192" height="192" style="border: solid gray 1px; margin-bottom: -50px;"> Hier wäre eine coole Animation, würdest du Javascript zulassen...</canvas>
 		<canvas id="canvas2" width="192" height="192" style="border: solid gray 1px; margin-bottom: -50px;"> Hier wäre eine coole Animation, würdest du Javascript zulassen...</canvas>
+		
 	</center>
-
+	<center><button type="button" style="margin-top: 50px; background-color: black; color: gray;" onclick="button()">start / stop</button></center>
 	<script>
 	var c = document.getElementById("canvas1");
 	var ctx = c.getContext("2d");
 
-	
 	var c2 = document.getElementById("canvas2");
 	var ctx2 = c2.getContext("2d");
 	
+	let paused = false;
 	let currentImg = 0;
 	
 	let player = new Image();
@@ -90,30 +91,39 @@
 	setInterval(act, 120);
 
 	function act(){
+		if(!paused){
+			if(currentImg === 9){
+				currentImg = 0;
+			}
+			else{
+				currentImg++;
+			}
 
-		if(currentImg === 9){
-			currentImg = 0;
-		}
-		else{
-			currentImg++;
-		}
-
-		ctx.clearRect(0,0,256,256);
-		ctx2.clearRect(0,0,256,256);
+			ctx.clearRect(0,0,256,256);
+			ctx2.clearRect(0,0,256,256);
+			
 		
-	
-		ctx2.drawImage(spell,0-currentImg*192,0);
-		ctx.drawImage(player,0-currentImg*192,0);
+			ctx2.drawImage(spell,0-currentImg*192,0);
+			ctx.drawImage(player,0-currentImg*192,0);
+		}
 	}
 
+	function button(){
+		if(paused){
+			paused = false;
+		}
+		else{
+			paused = true;
+		}
 
+	}
 
 
 	</script>
 
 
 <div class="container">
-	<div class="jumbotron"  id="header">
+	<div class="jumbotron"  id="header" style="margin-top: -50px;">
     		<h1><center>The Restless Caverns</center></h1>
     		<a href="../index.html" id="nostyle"><h3><center>Jan Ehehalt</center></h3></a><a href="https://hager-jonathan.de" id="nostyle"><h3><center>Jonathan Hager</center></h3></a>
   	</div>
