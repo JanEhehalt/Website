@@ -4,14 +4,35 @@
 
     </head>
     <body style="background-color: black;">
+        <div>
         <canvas id="canvas" width="800px" height="500px"style="float: left; border: solid gray 1px;"></canvas>
         <canvas id="canvas2" width="50px" height="500px"style="float: left; border: solid gray 1px;"></canvas>
+        </div>
+
+        <div style="float: left;">
         <button onClick="step()" style="float: left; width: 120px; height: 50px; margin: 2%; background-color: black; color: #bfbfbf;">Step</button>
         <button onClick="resume()" style="float: left; width: 120px; height: 50px; margin: 2%; background-color: black; color: #bfbfbf;">Start</button>
         <button onClick="stop()" style="float: left; width: 120px; height: 50px; margin: 2%; background-color: black; color: #bfbfbf;">Stop</button>
         <button onClick="reset()" style="float: left; width: 120px; height: 50px; margin: 2%; background-color: black; color: #bfbfbf;">Reset</button>
         <a href="index.html"><button style="float: left; width: 120px; height: 50px; margin: 2%; background-color: black; color: #bfbfbf;">Go Back</button></a>
 
+        <div style="float: left; margin-bottom: 5px; margin-top: 5px;">
+            <p style="color: white; float: left; margin: 0;">speed&nbsp;&nbsp;&nbsp;</p>
+            <input onClick="stop()" type="range" id="speed" name="vol" min="0" max="500" style=" float: left;">
+        </div>
+        <div style="float: left; margin-bottom: 5px; margin-top: 5px;">
+            <p style="color: white; float: left; margin: 0;">amount</p>
+            <input onClick="reset()" type="range" id="amount" name="vol" min="100" max="2000" style="float: left;">
+        </div>
+        <div style="float: left; margin-bottom: 5px; margin-top: 5px;">
+            <p style="color: white; float: left; margin: 0;">radius&nbsp;&nbsp;</p>
+            <input onClick="stop(), draw()" type="range" id="radius" name="vol" min="10" max="50" style="float: left;">
+        </div>
+        <div style="float: left; margin-bottom: 5px; margin-top: 5px;">
+            <p style="color: white; float: left; margin: 0;">start&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+            <input onClick="reset()" type="range" id="startAmount" name="vol" min="1" max="50" style="float: left;">
+        </div>
+        </div>
         <script>
             var c = document.getElementById("canvas");
             var ctx = c.getContext("2d");
@@ -19,14 +40,20 @@
             var c2 = document.getElementById("canvas2");
             var ctx2 = c2.getContext("2d");
 
+            var speed = document.getElementById("speed").value;
+
             let amount = 400;
-            let startInfected = 5;
+            let startInfected = document.getElementById("startAmount").value;
             let infectionChance = 0.5;
-            let helingChance = 0.05;
-            let infectionRadius = 30;
+            let healingChance = 0.05;
+            let infectionRadius = document.getElementById("radius").value;
             var x;
             var y;
             var z;
+
+            var steps = 0;
+
+            let running = false;
 
             create();
 
@@ -46,40 +73,65 @@
                 for(i = 0; i < startInfected; i++){
                     z[i] = 1;
                 }
-
                 act();
             }
 
             function step(){
                 act();
+                stop();
+                running = false;
             }
             function resume(){
-                interval = setInterval(act, 300);
+                if(!running){
+                    interval = setInterval(act, speed);
+                    running = true;
+                }
             }
             function stop(){
                 clearInterval(interval);
+                speed = 510-document.getElementById("speed").value;
+                running = false;
             }
             function reset(){
                 clearInterval(interval);
+                startInfected = document.getElementById("startAmount").value;
+                speed = 510-document.getElementById("speed").value;
+                amount = document.getElementById("amount").value;
+                running = false;
+                steps = 0;
                 create();
             }
 
             function act(){
+
+                steps++;
+
+                speed = 510-document.getElementById("speed").value;
+                infectionRadius = document.getElementById("radius").value;
+
                 for(i = 0; i < amount; i++){
                     if(z[i] !== 2){
                     let b = Math.floor(Math.random()*4);
                     switch(b){
                         case 0:
-                            x[i] += 5;
+                            if(x[i] < 795){
+                                x[i] += 5;
+                            }
                             break;
                         case 1:
-                            x[i] -= 5;
+                            if(x[i] >= 5){
+                                x[i] -= 5;
+                            }
                             break;
                         case 2:
-                            y[i] -= 5;
+                            if(y[i] >= 5){
+                                y[i] -= 5;
+                            }
                             break;
                         case 3:
-                            y[i] += 5;
+                            if(y[i] < 495){
+                                y[i] += 5;
+                            }
                             break;
                     }
                     }
@@ -101,26 +153,27 @@
                     ctx.fillRect(x[i], y[i], 5, 5);
 
                     if(z[i] !== 2){
-                    for(n = 0; n < amount; n++){
-                        if(n !== i && z[n] !== 2){
-                            if(z[i] === 1 && z[n] === 0){
-                                if(Math.sqrt(Math.pow(x[i]-x[n],2)+Math.pow(y[i]-y[n],2)) < infectionRadius){
-                                    ctx.beginPath();
-                                    ctx.beginPath();
-                                    ctx.arc(x[i]+2.5, y[i]+2.5, infectionRadius, 0, 2 * Math.PI, false);
-                                    ctx.lineWidth = 1;
-                                    ctx.strokeStyle = '#FF0000';
-                                    ctx.stroke();
+                        for(n = 0; n < amount; n++){
+                            if(n !== i && z[n] !== 2){
+                                if(z[i] === 1 && z[n] === 0){
+                                    if(Math.sqrt(Math.pow(x[i]-x[n],2)+Math.pow(y[i]-y[n],2)) < infectionRadius){
+                                        ctx.beginPath();
+                                        ctx.beginPath();
+                                        ctx.arc(x[i]+2.5, y[i]+2.5, infectionRadius, 0, 2 * Math.PI, false);
+                                        ctx.lineWidth = 1;
+                                        ctx.strokeStyle = '#FF0000';
+                                        ctx.stroke();
 
-                                    if(Math.random() < infectionChance){
-                                        if(z[n] === 1){
-                                            if(z[i] === 0){
-                                                z[i] = 1;
+                                        if(Math.random() < infectionChance && steps !== 1){
+                                            if(z[n] === 1){
+                                                if(z[i] === 0){
+                                                    z[i] = 1;
+                                                }
                                             }
-                                        }
-                                        if(z[i] === 1){
-                                            if(z[n] === 0){
-                                                z[n] = 1;
+                                            if(z[i] === 1){
+                                                if(z[n] === 0){
+                                                    z[n] = 1;
+                                                }
                                             }
                                         }
                                     }
@@ -128,9 +181,8 @@
                             }
                         }
                     }
-                }
                     if(z[i] === 1){
-                        if(Math.random() < helingChance){
+                        if(Math.random() < healingChance && steps !== 1){
                             z[i] = 2;
                         }
                     }
@@ -158,6 +210,45 @@
                 ctx2.fillRect(0,healthy/amount*500,50,infected/amount*500);
                 ctx2.fillStyle = "#242424";
                 ctx2.fillRect(0,healthy/amount*500+infected/amount*500,50,500);
+
+            }
+
+            function draw(){
+
+                speed = 510-document.getElementById("speed").value;
+                infectionRadius = document.getElementById("radius").value;
+
+                ctx.clearRect(0,0,800,500);
+
+                for(i = 0; i < amount; i++){
+                    if(z[i] === 0){
+                        ctx.fillStyle = "lightgray";
+                    }
+                    if(z[i] === 1){
+                        ctx.fillStyle = "red";
+                    }
+                    if(z[i] === 2){
+                        ctx.fillStyle = "#242424";
+                    }
+                    ctx.fillRect(x[i], y[i], 5, 5);
+
+                    if(z[i] !== 2){
+                        for(n = 0; n < amount; n++){
+                            if(n !== i && z[n] !== 2){
+                                if(z[i] === 1 && z[n] === 0){
+                                    if(Math.sqrt(Math.pow(x[i]-x[n],2)+Math.pow(y[i]-y[n],2)) < infectionRadius){
+                                        ctx.beginPath();
+                                        ctx.beginPath();
+                                        ctx.arc(x[i]+2.5, y[i]+2.5, infectionRadius, 0, 2 * Math.PI, false);
+                                        ctx.lineWidth = 1;
+                                        ctx.strokeStyle = '#FF0000';
+                                        ctx.stroke();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
 
             }
         </script>
