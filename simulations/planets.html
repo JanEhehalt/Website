@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body style="background-color: black;">
+        <div style="width: 855px;">
+        <canvas id="canvas" width="800px" height="500px"style="float: left; border: solid gray 1px;"></canvas>
+        </div>
+
+        <div style="float: left;">
+        <button onClick="stop(), nice()" style="float: left; width: 120px; height: 50px; margin: 2%; background-color: black; color: #bfbfbf;">Step</button>
+        <button onClick="start()" style="float: left; width: 120px; height: 50px; margin: 2%; background-color: black; color: #bfbfbf;">Start</button>
+        <button onClick="stop()" style="float: left; width: 120px; height: 50px; margin: 2%; background-color: black; color: #bfbfbf;">Stop</button>
+        <button onClick="reset()" style="float: left; width: 120px; height: 50px; margin: 2%; background-color: black; color: #bfbfbf;">Reset</button>
+        <a href="index.html"><button style="float: left; width: 120px; height: 50px; margin: 2%; background-color: black; color: #bfbfbf;">Go Back</button></a>
+        </div>
+
+        <div style="float: left; margin-bottom: 5px; margin-top: 5px;">
+            <p style="color: white; float: left; margin: 0;">amount</p>
+            <input onClick="reset()" type="range" id="amount" name="vol" min="10" max="100" style=" float: left;">
+        </div>
+
+        <script>
+            class Vector{
+                x;
+                y;
+                constructor(x, y){
+                    this.x = x;
+                    this.y = y;
+                }
+
+                mergeVector(v){
+                    this.x += v.x;
+                    this.y += v.y;
+                }
+                static getDist(v1,v2){
+                    return Math.sqrt(Math.pow(v1.x-v2.x,2)+Math.pow(v1.y-v2.y,2));
+                }
+                static  getAngleDegrees(fromX,fromY,toX,toY,force360 = false) {
+                    let deltaX = fromX - toX;
+                    let deltaY = fromY - toY;
+                    let radians = Math.atan2(deltaY, deltaX)
+                    let degrees = ((radians * 180) / Math.PI) - 90;
+                    if (force360) {
+                        degrees  = (degrees + 360) % 360;
+                    }
+                    return degrees;
+                }
+
+            }
+            class Object{
+                xPos;
+                yPos;
+                movement;
+                mass;
+                id;
+                toDelete;
+
+                constructor(xPos, yPos, id){
+                    this.xPos = xPos;
+                    this.yPos = yPos;
+                    this.id = id;
+                    this.mass = 500000;
+                    this.movement = new Vector(0,0);
+                    this.toDelete = false;
+                }
+
+                step(){
+                    this.xPos += this.movement.x;
+                    this.yPos += this.movement.y;
+                }
+                merge(o){
+                    this.weight += o.weight;
+                    movement.x = 0;
+                    movement.y = 0;
+                }
+                calcMovement(o){
+                    let length = o.length
+                    for(let i = 0; i < length; i++){
+                        if(i != this.id){
+                            let dist = Vector.getDist(new Vector(this.xPos, this.yPos), new Vector(o[i].xPos,o[i].yPos))
+                            
+                            let force = (G*((this.mass*o[i].mass)/dist));
+                            let angle = Vector.getAngleDegrees(this.xPos, this.yPos, o[i].xPos, o[i].yPos)+180;
+                            let xTemp = Math.cos(angle)*force;
+                            let yTemp = Math.sin(angle)*force;
+                            
+                            this.movement.mergeVector(new Vector(xTemp,yTemp));
+                        }
+                    }
+                }
+            }
+
+            var c = document.getElementById("canvas");
+            var ctx = c.getContext("2d");
+
+            const G = 6.6 * Math.pow(10,-11);
+
+            let running = true;
+
+            let objects = [];
+
+            let trace = [];
+
+            reset();
+
+            var interval = setInterval(nice,100);
+
+            function stop(){
+                clearInterval(interval);
+                running = false;
+            }
+            function start(){
+                if(!running){
+                    interval = setInterval(nice,100);
+                    running = true;
+                }
+            }
+            function reset(){
+                stop();
+                objects = [];
+                trace = [];
+                for(let i = 0; i < document.getElementById("amount").value; i++){
+                    objects.push(new Object(Math.random()*800, Math.random()*500, i));
+                }
+                nice();
+            }
+
+            function nice(){
+                ctx.clearRect(0,0,1000,1000);
+                ctx.fillStyle = "gray";
+                for(let i = 0; i < trace.length; i++){
+                    ctx.beginPath();
+                    ctx.arc(trace[i].x,trace[i].y, 1, 0, 2 * Math.PI);
+                    ctx.fill();
+                }
+                ctx.fillStyle = "white";
+                for(let i = 0; i < objects.length; i++){
+                    ctx.beginPath();
+                    ctx.arc(objects[i].xPos,objects[i].yPos, 5, 0, 2 * Math.PI);
+                    ctx.fill();
+                }
+                
+                for(let i = 0; i < objects.length; i++){
+                    objects[i].calcMovement(objects);
+                }
+                for(let i = 0; i < objects.length; i++){
+                    objects[i].step();
+                    trace.push(new Vector(objects[i].xPos, objects[i].yPos));
+                    console.log(trace);
+                }
+                /*for(let i = 0; i < objects.length; i++){
+                    console.log("Id: "+objects[i].id +" x: "+ objects[i].xPos + " y: " + objects[i].yPos);
+                    console.log("Id: "+objects[i].id +" x: "+ objects[i].movement.x + " y: " + objects[i].movement.y);
+                    console.log(Vector.getAngleDegrees(objects[0].xPos, objects[0].yPos, objects[1].xPos, objects[1].yPos));
+                    
+                }*/
+            }
+            
+        </script>
+
+    </body>
+</html>
