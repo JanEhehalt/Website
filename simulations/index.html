@@ -106,10 +106,10 @@
         </a>
         
         <!-- 2 -->
-        <a href="./" class="grid" style="border: solid gray 2px;">
+        <a href="./planets.html" class="grid" style="border: solid gray 2px;">
             <div class="innerGrid">
                 <div class="innerHeadline">
-                    <h1 class="heading"><center>Name</center></h1>
+                    <h1 class="heading"><center>Gravity</center></h1>
                 </div>
                 <div class="innerPic">
                     <center><canvas id="pic2" width="460px" height="306px"> </canvas></center>
@@ -187,7 +187,7 @@
             let img1 = new Image();
             img1.src = "./virus.png";
             let img2 = new Image();
-            img2.src = "./player.png";
+            img2.src = "./gravity.png";
             let img3 = new Image();
             img3.src = "./player.png";
             /*
@@ -198,8 +198,7 @@
             let img6 = new Image();
             img6.src = "./player.png";
             */
-            
-            setInterval(nice, 1000);
+            setInterval(nice,10);
 
             function nice(){
                 ctx1.drawImage(img1,0,0, c1.width, c1.height);
